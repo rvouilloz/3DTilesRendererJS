@@ -631,7 +631,7 @@ export class TilesRenderer extends TilesRendererBase {
 		}
 
 		const fileType = readMagicBytes( buffer ) || extension;
-		switch ( fileType ) {
+		switch ( fileType.toLowerCase() ) {
 
 			case 'b3dm': {
 
