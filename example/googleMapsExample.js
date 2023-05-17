@@ -31,7 +31,7 @@ import {
 	Sphere,
 	SphereGeometry,
 } from 'three';
-import { FlyOrbitControls } from './FlyOrbitControls.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
@@ -225,6 +225,9 @@ function reinstantiateTiles() {
 
 			};
 
+			tiles.lruCache.minSize = 3000;
+			tiles.lruCache.maxSize = 5000;
+
 			setupTiles();
 
 			} )
@@ -249,7 +252,7 @@ function init() {
 	document.body.appendChild( renderer.domElement );
 	renderer.domElement.tabIndex = 1;
 
-	camera = new PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 100000000 );
+	camera = new PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 16000000 );
 	camera.position.set( 7326000, 10279000, -823000 );
 	cameraHelper = new CameraHelper( camera );
 	scene.add( cameraHelper );
@@ -261,10 +264,10 @@ function init() {
 	scene.add(mesh);
 
 	// controls
-	controls = new FlyOrbitControls( camera, renderer.domElement );
-	controls.screenSpacePanning = false;
-	controls.minDistance = 1;
-	controls.maxDistance = 100000000;
+	controls = new OrbitControls( camera, renderer.domElement );
+	controls.enablePan = false;
+	controls.minDistance = 6500000;
+	controls.maxDistance = 13315000;
 
 	// lights
 	const dirLight = new DirectionalLight( 0xffffff );
